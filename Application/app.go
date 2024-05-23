@@ -3,10 +3,9 @@ package application
 import (
 	"context"
 	"fmt"
+	"github.com/redis/go-redis/v9"
 	"net/http"
 	"time"
-
-	"github.com/redis/go-redis/v9"
 )
 
 type App struct {
@@ -36,10 +35,8 @@ func (a *App) Start(ctx context.Context) error {
 	}
 
 	defer func() {
-
 		if err := a.rdb.Close(); err != nil {
 			fmt.Println("Failed to close redis", err)
-
 		}
 	}()
 
@@ -53,8 +50,9 @@ func (a *App) Start(ctx context.Context) error {
 		if err != nil {
 			ch <- fmt.Errorf("Failed to start server: %w", err)
 		}
+
+		close(ch)
 	}()
-	close(ch)
 
 	select {
 	case err = <-ch:
