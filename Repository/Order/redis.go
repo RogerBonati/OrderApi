@@ -98,7 +98,7 @@ func (r *RedisRepo) Update(ctx context.Context, order model.Order) error {
 	if err != nil {
 		return fmt.Errorf("Failed to encode order: %w", err)
 	}
-	key := order.OrderId(order, OrderId)
+	key := OrderIDKey(order.OrderId)
 
 	err = r.Client.SetXX(ctx, key, string(data), 0).Err() // SetXX do the update only if the entry exist
 
