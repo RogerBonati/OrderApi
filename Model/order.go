@@ -6,12 +6,12 @@ import (
 )
 
 type Order struct {
-	OrderId     uint64     `json:"order_id,omitempty"`
-	CustomerId  uuid.UUID  `json:"customer_id,omitempty"`
-	LineItems   []LineItem `json:"line_items,omitempty"`
-	CreatedAt   *time.Time `json:"created_at,omitempty"`
-	ShippedAt   *time.Time `json:"shipped_at,omitempty"`
-	CompletedAt *time.Time `json:"completed_at,omitempty"`
+	OrderId     uint64     `json:"order_id"`
+	CustomerId  uuid.UUID  `json:"customer_id"`
+	LineItems   []LineItem `json:"line_items"`
+	CreatedAt   *time.Time `json:"created_at"`
+	ShippedAt   *time.Time `json:"shipped_at"`
+	CompletedAt *time.Time `json:"completed_at"`
 }
 
 type LineItem struct {
